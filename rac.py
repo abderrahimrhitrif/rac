@@ -6,7 +6,8 @@ from preprocess import CodePreprocessor
 from db import MilvusManager
 
 class RAC:
-    def __init__(self, repo_name: str):
+    def __init__(self, repo_name: str, tokenizer: str = "sentence-transformers/all-MiniLM-L6-v2", model: str = "Qwen3:0.6B"):
+        self.model_name = model
         self.repo_name = repo_name
         parts = repo_name.rstrip('/').split("/")
         self.collection_name = "_".join(parts[-2:])
@@ -42,7 +43,8 @@ class RAC:
         data = self.db_manager.prepare_data(embeddings, processed_docs)
         self.db_manager.insert_data(self.collection_name, data)
 
-    def ask(self, question: str, model: str = "Qwen3:0.6B", messages : list = [] ):
+    def ask(self, question: str, messages : list = [] ):
+        model = self.model_name
         queries = self.prepare_prompt(question, model=model)
         queries = queries if queries else [question]
         retrieved_docs = []
