@@ -1,0 +1,17 @@
+# Byte-compiled files
+__pycache__/
+*.pyc
+
+# Database file
+milvus_demo.db
+
+# Data directory
+data/
+
+# macOS specific
+.DS_Store
+
+# Virtual environment
+.venv/
+venv/
+env/
