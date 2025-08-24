@@ -1,8 +1,10 @@
 # RAC: Retrieval-Augmented Code
 
+**This project is in early development and not yet fully featured.**
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-RAC is a powerful and flexible tool that allows you to chat with your codebase. By leveraging Retrieval-Augmented Generation (RAG), RAC can answer your questions about a GitHub repository, providing you with accurate and context-aware answers.
+RAC is a tool that allows you to chat with your codebase. By using Retrieval-Augmented Generation (RAG), RAC can answer your questions about a GitHub repository, providing you with accurate and context-aware answers. This is mainly intended for models with smaller models that lack the context window and paramter count to be aware of a whole repo.
 
 ## How it Works
 
