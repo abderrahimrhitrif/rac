@@ -30,6 +30,7 @@ RAC uses a Retrieval-Augmented Generation (RAG) pipeline to answer your question
     ```bash
     pip install -r requirements.txt
     ```
+3. **Insure that you have ollama installed with the model you want to use downloaded**
 
 ## Usage
 
