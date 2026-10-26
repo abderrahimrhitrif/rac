@@ -1,51 +1,36 @@
-# RAC: Retrieval-Augmented Code
+# RAC — Retrieval-Augmented Code
 
-**This project is in early development and not yet fully featured.**
+## Overview
+RAC (Retrieval-Augmented Code) is a CLI tool that enables developers to chat with any GitHub repository by fetching source code, chunking it, embedding it into a Milvus vector database, and generating context-grounded answers using local LLMs.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Architecture & Pipeline
+1. **Fetch (`fetch.py`)**: Downloads and extracts target GitHub repository source code.
+2. **Preprocess (`preprocess.py`)**: Language-aware code splitting (functions, classes, paragraphs), token chunking via tiktoken / sentence-transformers, and embedding generation.
+3. **Store (`db.py`)**: Manages Milvus vector database collections for storing code vector embeddings.
+4. **Query & Generate (`rac.py`, `main.py`)**: Breaks down user queries into sub-questions, retrieves relevant code chunks from Milvus, and queries Ollama local models with grounded context.
 
-RAC is a tool that allows you to chat with your codebase. By using Retrieval-Augmented Generation (RAG), RAC can answer your questions about a GitHub repository, providing you with accurate and context-aware answers. This is mainly intended for models with smaller models that lack the context window and paramter count to be aware of a whole repo.
+## Data
+- **Source**: Target GitHub repositories fetched via API or archive downloads.
 
-## How it Works
+## Method & Algorithms
+- **Code Retrieval RAG**: Vector similarity search over embedded source code chunks.
+- **Query Decomposition**: LLM-based sub-question generation to improve multi-part code retrieval recall.
 
-RAC uses a Retrieval-Augmented Generation (RAG) pipeline to answer your questions. Here's a high-level overview of the process:
+## Verified Results & Metrics
+- Implemented full end-to-end RAG pipeline for source code repositories utilizing Milvus vector storage and Ollama local LLM inference.
 
-1.  **Fetch:** RAC fetches the target GitHub repository and extracts its content.
-2.  **Preprocess:** The code is split into smaller chunks, and each chunk is embedded using a sentence transformer model.
-3.  **Store:** The embeddings are stored in a Milvus database for efficient retrieval.
-4.  **Retrieve:** When you ask a question, RAC embeds the question and retrieves the most relevant code snippets from the Milvus database.
-5.  **Generate:** The retrieved code snippets are then used as context for a large language model (LLM) to generate an answer.
+## Limitations & Caveats
+- Early development CLI tool; depends on local Ollama and Milvus service availability.
 
-## Installation
-
-1.  **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/abderrahimrhitrif/rac.git
-    cd RAC
-    ```
-
-2.  **Install the dependencies:**
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-3. **Insure that you have ollama installed with the model you want to use downloaded**
-
-## Usage
-
-To use RAC, you need to provide the URL of the GitHub repository and the question you want to ask.
-
+## Run Instructions
 ```bash
-python main.py <repo_url> <model_name> "<your_question>"
+pip install -r requirements.txt
+python main.py <repo_url> <model_name> "<question>"
 ```
 
-For example:
+## CV Bullet Points
+- Developed RAC (Retrieval-Augmented Code), a CLI tool to chat with GitHub repositories using a full RAG pipeline (repo fetching, language-aware code chunking, sentence-transformers, Milvus vector database, Ollama).
+- Implemented query decomposition to break down complex queries into sub-questions for enhanced code retrieval precision.
 
-```bash
-python main.py fastapi/fastapi Qwen3:0.6B "How does dependency injection work in fast api?"
-```
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## Claims to Avoid
+- Do not claim commercial developer IDE plugin deployment.
