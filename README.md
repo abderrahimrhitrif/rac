@@ -27,10 +27,3 @@ RAC (Retrieval-Augmented Code) is a CLI tool that enables developers to chat wit
 pip install -r requirements.txt
 python main.py <repo_url> <model_name> "<question>"
 ```
-
-## CV Bullet Points
-- Developed RAC (Retrieval-Augmented Code), a CLI tool to chat with GitHub repositories using a full RAG pipeline (repo fetching, language-aware code chunking, sentence-transformers, Milvus vector database, Ollama).
-- Implemented query decomposition to break down complex queries into sub-questions for enhanced code retrieval precision.
-
-## Claims to Avoid
-- Do not claim commercial developer IDE plugin deployment.
